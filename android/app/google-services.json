@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "783085180732",
+    "project_id": "foru-7d705",
+    "storage_bucket": "foru-7d705.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783085180732:android:596716cb91c5e3f23c7039",
+        "android_client_info": {
+          "package_name": "com.burakaksu.flutter_foru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783085180732-gcp902hoasf115qijp44kcvi567e7q80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.burakaksu.flutter_foru",
+            "certificate_hash": "7e3283800c1fd2a7f7b09110b028c3cfaf45b59d"
+          }
+        },
+        {
+          "client_id": "783085180732-2cqn73i92pt9j1si0a2a3i62t33s2vbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjuTRwJiPhrb3WexixEOBMW4s02ao2OTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783085180732-2cqn73i92pt9j1si0a2a3i62t33s2vbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
