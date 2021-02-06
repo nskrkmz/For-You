@@ -37,20 +37,8 @@ class _UserDrawerMenuState extends State<UserDrawerMenu> {
             },
             highlightColor: Colors.blue,
             child: ListTile(
-              leading: Icon(Icons.arrow_back),
-              title: Text("Sayfa Adı"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-          ),
-          InkWell(
-            onTap: (){
-              //Navigator.pushNamed(context, "/sayfa")
-            },
-            highlightColor: Colors.blue,
-            child: ListTile(
               leading: Icon(Icons.power_settings_new_outlined),
               title: Text("Çıkış Yap"),
-              trailing: Icon(Icons.arrow_forward),
               onTap: _showDialog,
             ),
           ),

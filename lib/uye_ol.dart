@@ -14,6 +14,8 @@ class UyeOl extends StatefulWidget {
 class _UyeOlState extends State<UyeOl> {
 
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  Color color1 = const Color(0xFFEA4C4D);
+  Color color2 = const Color(0xFFEDB758);
 
   String _kullaniciAd = "default";
   String _kullaniciSoyad = "default";
@@ -31,6 +33,12 @@ class _UyeOlState extends State<UyeOl> {
         title: Text("Üye ol"),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [color1,color2],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+        ),
         padding: EdgeInsets.all(20.0),
         alignment: Alignment.center,
         child: Form(
@@ -231,7 +239,7 @@ class _UyeOlState extends State<UyeOl> {
                 icon: Icon(Icons.arrow_forward,color: Colors.white,),
                 label: Text("Kayıt Ol",style: TextStyle(color: Colors.white),),
                 onPressed: _emailSifreKullaniciOlustur,
-                color: Colors.blueAccent,
+                color: Colors.purple,
               ),
 
             ],

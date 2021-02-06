@@ -71,19 +71,6 @@ class _ManagerDrawerMenuState extends State<ManagerDrawerMenu> {
               trailing: Icon(Icons.arrow_forward),
             ),
           ),
-          // Üye islemleri
-          InkWell(
-            onTap: (){
-              Navigator.pushNamed(context, "/DrawerUyeislemleri");
-            },
-            highlightColor: Colors.blue,
-            //splashColor: Colors.red,
-            child: ListTile(
-              leading: Icon(Icons.people_outline),
-              title: Text("Üyeler"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-          ),
           // Çıkıs yap
           InkWell(
             onTap: _showDialog,
@@ -92,6 +79,7 @@ class _ManagerDrawerMenuState extends State<ManagerDrawerMenu> {
             child: ListTile(
               leading: Icon(Icons.power_settings_new_outlined),
               title: Text("Çıkış Yap"),
+              trailing: Icon(Icons.arrow_forward),
             ),
           ),
         ],

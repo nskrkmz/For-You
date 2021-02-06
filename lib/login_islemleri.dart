@@ -48,7 +48,18 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
           key: girisKey,
           child: ListView(
             children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 30),
+              Container(
+                width: 200,
+                height: 150,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/partnership.png"),
+                  )
+                ),
+              ),
+              Text("For You",textAlign: TextAlign.center,style: TextStyle(fontFamily: 'LoginFont',fontSize: 40,color: Colors.white),),
+              SizedBox(height: 50,),
               //Email giriş
               TextFormField(
                 controller: emailcontroller,
@@ -158,16 +169,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> UyeOl(_auth)));
                   }
-                  ),
-              RaisedButton.icon(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    side: BorderSide(color: Colors.purple),
-                  ),
-                  icon: Icon(Icons.lock,color: Colors.white,),
-                  label: Text("Şifremi Unuttum",style: TextStyle(color: Colors.white),),
-                  color: Colors.purple,
-                  onPressed: (){}
                   ),
               // cıkıs yap
               RaisedButton(

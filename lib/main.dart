@@ -5,6 +5,7 @@ import 'package:flutter_foru/manager/manager_homepage.dart';
 import 'package:flutter_foru/manager/manager_juri_islemleri.dart';
 import 'package:flutter_foru/manager/manager_proje_islemleri.dart';
 import 'package:flutter_foru/manager/manager_uyeler.dart';
+import 'package:flutter_foru/user/user_secilen_proje.dart';
 
 import 'user/user_homepage.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         "/DrawerJuriislemleri" : (context) => ManagerJuriIslemleri(),
         "/DrawerUyeislemleri" : (context) => ManagerUyeEkran(),
         "/Login" : (context) => LoginIslemleri(),
-
+        "/SecilenProje" : (context) => UserSecilenProje(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

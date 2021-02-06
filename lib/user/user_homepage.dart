@@ -62,13 +62,12 @@ class _UserHomePageState extends State<UserHomePage> {
               icon: Icon(Icons.settings),
               label: "Ayarlar",
               backgroundColor: Colors.deepOrange),
-
         ],
         type: BottomNavigationBarType.shifting,
         currentIndex: secilenMenuItem,
         onTap: (index){
           setState(() {
-            secilenMenuItem=index;
+            secilenMenuItem = index;
           });
         },
       ),
