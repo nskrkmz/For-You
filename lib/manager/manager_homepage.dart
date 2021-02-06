@@ -34,7 +34,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: ManagerDrawerMenu(),
+      drawer: ManagerDrawerMenu(firebaseAuthYonetici: widget.firebaseAuthManager,),
       appBar: AppBar(
         title: Text("Manager Home Page"),
       ),

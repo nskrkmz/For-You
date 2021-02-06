@@ -15,7 +15,7 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   List<Proje> tumProjeler = List();
   
   var projeKey = GlobalKey<FormState>();
-  int _projeID = 0;
+  String _projeID = "default";
   String _projeBaslik = "default";
   String _projeKatogori = "default";
   String _projejuri = "default";
@@ -26,7 +26,7 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   @override
   void initState() {
     super.initState();
-    tumProjeler.add(Proje(projeID: 0, projeBaslik: "Default", projeJuri: "Default", projeOdul: "Default",projeAyrtintilari: "Default"));
+    tumProjeler.add(Proje(projeID: "Default", projeBaslik: "Default", projeJuri: "Default", projeOdul: "Default",projeAyrtintilari: "Default"));
   }
 
   @override
@@ -42,15 +42,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
           key: projeKey,
           child: ListView(
             children: <Widget>[
-              Container(
-                width: 200,
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue,width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Center(child: Text("Proje ID: PR${tumProjeler.length}", style: TextStyle(fontSize: 20))),
-              ),
               SizedBox(height: 10,),
               // Proje Başlığı
               TextFormField(
@@ -241,7 +232,9 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                   projeKey.currentState.save();
                   projeKey.currentState.reset();
                   // Hem firebase e hemde local listeye ekleme yapıyor. Liste uzunluğunu belirliyor.
-                  tumProjeler.add(Proje(projeID: _projeID, projeBaslik: _projeBaslik, projeJuri: _projejuri, projeOdul: _projeOdul,projeAyrtintilari: _projeAyrinti));
+                  setState(() {
+                    tumProjeler.add(Proje(projeID: _projeID, projeBaslik: _projeBaslik, projeJuri: _projejuri, projeOdul: _projeOdul,projeAyrtintilari: _projeAyrinti));
+                  });
                   _firebaseFirestore.collection('Projeler').doc('Pr${tumProjeler.length}').set(projeAyrintiGetir());
                 },
                 color: Colors.blueAccent,
@@ -265,3 +258,15 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
     return projeAyrtintilari;
   }
 }
+
+/*
+Container(
+                width: 200,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue,width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Center(child: Text("Proje ID: PR${tumProjeler.length + 1}", style: TextStyle(fontSize: 20))),
+              ),
+*/

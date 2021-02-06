@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         "/DrawerProjeislemleri" : (context) => ManagerProjeIslemleri(),
         "/DrawerJuriislemleri" : (context) => ManagerJuriIslemleri(),
         "/DrawerUyeislemleri" : (context) => ManagerUyeEkran(),
+        "/Login" : (context) => LoginIslemleri(),
 
       },
       title: 'Flutter Demo',
@@ -52,7 +53,7 @@ class App extends StatelessWidget {
         }
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done){
-          return UserHomePage();
+          return LoginIslemleri();
         }
         // Otherwise, show something whilst waiting for initialization to complete
         return Scaffold(

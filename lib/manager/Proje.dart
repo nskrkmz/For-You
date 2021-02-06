@@ -1,7 +1,7 @@
 class Proje{
-  int projeID;
+  String projeID;
   String projeBaslik;
-  String projeKatogori;
+  String projeKategori;
   String projeJuri;
   String projeOdul;
   String projeSuresi;
@@ -10,7 +10,7 @@ class Proje{
   Proje(
       {this.projeID,
       this.projeBaslik,
-      this.projeKatogori,
+      this.projeKategori,
       this.projeJuri,
       this.projeOdul,
       this.projeSuresi,

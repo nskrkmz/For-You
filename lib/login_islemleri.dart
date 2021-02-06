@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foru/manager/manager_homepage.dart';
+import 'package:flutter_foru/user/user_homepage.dart';
 import 'package:flutter_foru/uye_ol.dart';
 
 class LoginIslemleri extends StatefulWidget {
@@ -142,7 +144,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                 icon: Icon(Icons.arrow_forward,color: Colors.white,),
                 label: Text("Giriş Yap",style: TextStyle(color: Colors.white),),
                 color: Colors.purple,
-                onPressed: (){},
+                onPressed: _emailSifreKullaniciGirisyap,
               ),
               //Üye ol Butonu
               RaisedButton.icon(
@@ -179,6 +181,47 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
       ),
     );
   }
+
+
+  void _emailSifreKullaniciGirisyap() async {
+    girisKey.currentState.save();
+    //debugPrint("save methodu calisti amaa ???");
+    try {
+      // eger giriş yapmış kullanıcı yoksa
+      if (_auth.currentUser == null) {
+        // Yönetici kontolü
+        _firebaseFirestore.collection("yönetici").get().then((gelenVeri) async {
+          //debugPrint("Okunması istenen değer: " + gelenVeri.docs[0].data().toString());
+          for(int i= 0; i<gelenVeri.docs.length; i++){
+            if((gelenVeri.docs[i].data()['Email']).toString() == _email){
+              User _oturumAcanYonetici = (await _auth.signInWithEmailAndPassword(email: _email, password: _password)).user;
+              //debugPrint("Login Sayfası oturum açan yonetici email:  "+ _oturumAcanYonetici.email);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ManagerHomePage(firebaseAuthManager: _auth)));
+            }
+          }
+        });
+
+        // Uye kontrolü
+        _firebaseFirestore.collection("users").get().then((gelenVeri) async {
+          for(int i=0; i< gelenVeri.docs.length; i++){
+            if(gelenVeri.docs[i].data()['Email'].toString() == _email){
+              User _oturumAcanUser = (await _auth.signInWithEmailAndPassword(email: _email, password: _password)).user;
+              debugPrint(_oturumAcanUser.toString());
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserHomePage(firebaseAuthUser: _auth,)));
+            }
+          }
+        });
+      } else {
+        // giriş yapmış bir kullanıcı
+        debugPrint("Zaten giriş yapmış bir kullanıcı var");
+      }
+    } catch (e) {
+      debugPrint("Oturum Açarken HATA!:" + e.toString());
+    }
+
+  }
+
+
   void _cikisYap() async {
     try {
       // sistemde kullanıcı varsa çıkış yap
