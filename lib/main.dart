@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foru/login_islemleri.dart';
+import 'package:flutter_foru/manager/manager_homepage.dart';
+import 'package:flutter_foru/manager/manager_juri_islemleri.dart';
+import 'package:flutter_foru/manager/manager_proje_islemleri.dart';
+import 'package:flutter_foru/manager/manager_uyeler.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,11 +15,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: {
+        "/" : (context) => App(),
+        "/DrawerProjeislemleri" : (context) => ManagerProjeIslemleri(),
+        "/DrawerJuriislemleri" : (context) => ManagerJuriIslemleri(),
+        "/DrawerUyeislemleri" : (context) => ManagerUyeEkran(),
+
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: App(),
     );
   }
 }
@@ -40,7 +50,7 @@ class App extends StatelessWidget {
         }
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done){
-          return LoginIslemleri();
+          return ManagerHomePage();
         }
         // Otherwise, show something whilst waiting for initialization to complete
         return Scaffold(
