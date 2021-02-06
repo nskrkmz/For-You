@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foru/manager/Proje.dart';
 import 'package:flutter_foru/user/user_drawer.dart';
 
 class UserProjectPage extends StatefulWidget {
@@ -7,13 +9,110 @@ class UserProjectPage extends StatefulWidget {
 }
 
 class _UserProjectPageState extends State<UserProjectPage> {
-  List<String> isimler = List();
-  int voit = 0 ;
+  //List<String> isimler = List();
+  //int voit = 0;
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  List <Proje> tumProjeler = List();
+  String okunanProjeID;
+  String okunanProjeBaslik;
+  String okunanProjeKategori;
+  String okunanProjeJuri;
+  String okunanProjeOdul;
+  String okunanProjeSuresi;
+  String okunanProjeAyrintilar;
+
+  @override
+  void initState() {
+    super.initState();
+    tumProjeler = [];
+    _firebaseFirestore.collection('Projeler').get().then((gelenVeri) {
+      for(int i = 0; i< gelenVeri.docs.length; i++){
+        setState(() {
+          okunanProjeID = gelenVeri.docs[i].data()['Proje ID'];
+          okunanProjeBaslik = gelenVeri.docs[i].data()['Proje Başlığı'];
+          okunanProjeKategori = gelenVeri.docs[i].data()['Proje Katogorisi'];
+          okunanProjeJuri = gelenVeri.docs[i].data()['Proje Jürüsi'];
+          okunanProjeOdul = gelenVeri.docs[i].data()['Proje Odul'];
+          okunanProjeSuresi = gelenVeri.docs[i].data()['Proje Süre'];
+          okunanProjeAyrintilar = gelenVeri.docs[i].data()['Proje Ayrıntıları'];
+        });
+        tumProjeler.add(Proje(projeID: okunanProjeID, projeBaslik: okunanProjeBaslik, projeKategori: okunanProjeKategori, projeJuri: okunanProjeJuri, projeOdul: okunanProjeOdul, projeSuresi: okunanProjeSuresi, projeAyrtintilari: okunanProjeAyrintilar));
+      }
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: UserDrawerMenu(),
-        body: Column(
+        body: ListView.builder(
+          itemBuilder: _listeElemanOlustur,
+          itemCount: tumProjeler.length,
+        ),
+    );
+  }
+
+  Widget _listeElemanOlustur(BuildContext context, int index) {
+    return Column(
+      children: <Widget>[
+        Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(40.0),bottomLeft: Radius.circular(40.0)),
+                  border: Border.all(color: Colors.blue,width: 3),
+                ),
+                height: 220,
+                width: 100,
+                child: Column(
+                  children: <Widget>[
+                    // Proje baslıgı
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(tumProjeler[index].projeBaslik)
+                    ),
+                    // Proje acıklaması
+                    Container(
+                      color: Colors.red,
+                      padding: EdgeInsets.all(20.0),
+                      child: Text(tumProjeler[index].projeAyrtintilari),
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Text("Proje Süresi: " + tumProjeler[index].projeSuresi),
+                            SizedBox(height: 3,),
+                            Text("Proje Ödülü: " + tumProjeler[index].projeOdul),
+                          ],
+                        ),
+                        IconButton(
+                          color: Colors.blue,
+                          icon: Icon(Icons.arrow_forward,size:30),
+                          onPressed: (){},
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 5,),
+        Divider(color: Colors.black,thickness: 1,),
+      ],
+    );
+  }
+}
+
+
+
+/*
+Column(
           children: <Widget>[
             Align(
               alignment: Alignment.topCenter,
@@ -55,25 +154,4 @@ class _UserProjectPageState extends State<UserProjectPage> {
             ),
           ],
         )
-    );
-  }
-  Widget _urunler(BuildContext context, int index) {
-    return Card(
-      color: Colors.white70,
-      child: ListTile(
-        leading: Icon(Icons.article_rounded),
-        title: Text("Proje Başlığı"), //Firebase den alınacak
-        subtitle: Text("Proje Açıklaması"), //Firebase den alınacak
-        trailing: Icon(Icons.arrow_forward),
-      ),
-    );
-  }
-  void _projeEkle (){
-    setState(() {
-
-      isimler.add("Card ${voit}");
-
-    });
-  }
-
-}
+*/
