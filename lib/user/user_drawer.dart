@@ -20,6 +20,9 @@ class _UserDrawerMenuState extends State<UserDrawerMenu> {
             accountEmail: Text("enes@hotmail.com"), //değişkene atılacak
             currentAccountPicture: Container(
               decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/ekran2.png"),
+                ),
                 shape: BoxShape.circle,
                 //resim asset eklenecek
               ),

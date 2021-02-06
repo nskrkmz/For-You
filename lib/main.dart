@@ -6,6 +6,8 @@ import 'package:flutter_foru/manager/manager_juri_islemleri.dart';
 import 'package:flutter_foru/manager/manager_proje_islemleri.dart';
 import 'package:flutter_foru/manager/manager_uyeler.dart';
 
+import 'user/user_homepage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -50,7 +52,7 @@ class App extends StatelessWidget {
         }
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done){
-          return ManagerHomePage();
+          return UserHomePage();
         }
         // Otherwise, show something whilst waiting for initialization to complete
         return Scaffold(
