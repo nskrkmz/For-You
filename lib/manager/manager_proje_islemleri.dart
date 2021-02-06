@@ -23,10 +23,33 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   String _projeSure = "default";
   String _projeAyrinti = "default";
   Map<String, dynamic> projeAyrtintilari = Map();
+
+  String okunanProjeID;
+  String okunanProjeBaslik;
+  String okunanProjeKategori;
+  String okunanProjeJuri;
+  String okunanProjeOdul;
+  String okunanProjeSuresi;
+  String okunanProjeAyrintilar;
+
+
   @override
   void initState() {
     super.initState();
-    tumProjeler.add(Proje(projeID: "Default", projeBaslik: "Default", projeJuri: "Default", projeOdul: "Default",projeAyrtintilari: "Default"));
+    _firebaseFirestore.collection('Projeler').get().then((gelenVeri) {
+      for(int i = 0; i< gelenVeri.docs.length; i++){
+        setState(() {
+          okunanProjeID = gelenVeri.docs[i].data()['Proje ID'];
+          okunanProjeBaslik = gelenVeri.docs[i].data()['Proje Başlığı'];
+          okunanProjeKategori = gelenVeri.docs[i].data()['Proje Katogorisi'];
+          okunanProjeJuri = gelenVeri.docs[i].data()['Proje Jürüsi'];
+          okunanProjeOdul = gelenVeri.docs[i].data()['Proje Odul'];
+          okunanProjeSuresi = gelenVeri.docs[i].data()['Proje Süre'];
+          okunanProjeAyrintilar = gelenVeri.docs[i].data()['Proje Ayrıntıları'];
+        });
+        tumProjeler.add(Proje(projeID: okunanProjeID, projeBaslik: okunanProjeBaslik, projeKategori: okunanProjeKategori, projeJuri: okunanProjeJuri, projeOdul: okunanProjeOdul, projeSuresi: okunanProjeSuresi, projeAyrtintilari: okunanProjeAyrintilar));
+      }
+    });
   }
 
   @override
@@ -248,7 +271,7 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
 
   Map<String, dynamic> projeAyrintiGetir(){
 
-    projeAyrtintilari['Proje ID'] = tumProjeler.length;
+    projeAyrtintilari['Proje ID'] = tumProjeler.length.toString();
     projeAyrtintilari['Proje Başlığı'] = _projeBaslik;
     projeAyrtintilari['Proje Katogorisi'] = _projeKatogori;
     projeAyrtintilari['Proje Jürisi'] = _projejuri;

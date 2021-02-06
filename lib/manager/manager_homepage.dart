@@ -19,15 +19,13 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   List<Widget> tumSayfalar;
   ManagerIlkEkran _ilkEkran;
   ManagerJuriEkran _juriEkran;
-  ManagerProfileEkran _profileEkran;
 
   @override
   void initState() {
     super.initState();
     _ilkEkran = ManagerIlkEkran();
     _juriEkran = ManagerJuriEkran();
-    _profileEkran = ManagerProfileEkran();
-    tumSayfalar = [_ilkEkran, _juriEkran, _profileEkran];
+    tumSayfalar = [_ilkEkran, _juriEkran];
   }
 
 
@@ -61,10 +59,6 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.people),
               label: "Jüriler",
-              backgroundColor: Colors.deepOrange),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Profil Ayarları",
               backgroundColor: Colors.deepOrange),
         ],
         type: BottomNavigationBarType.shifting,

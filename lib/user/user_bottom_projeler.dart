@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foru/manager/Proje.dart';
 import 'package:flutter_foru/user/user_drawer.dart';
+import 'package:flutter_foru/user/user_secilen_proje.dart';
 
 class UserProjectPage extends StatefulWidget {
   @override
@@ -21,6 +22,8 @@ class _UserProjectPageState extends State<UserProjectPage> {
   String okunanProjeSuresi;
   String okunanProjeAyrintilar;
 
+  Color color1 = const Color(0xFFEA4C4D);
+  Color color2 = const Color(0xFFEDB758);
   @override
   void initState() {
     super.initState();
@@ -44,9 +47,11 @@ class _UserProjectPageState extends State<UserProjectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-          itemBuilder: _listeElemanOlustur,
-          itemCount: tumProjeler.length,
+        body: Container(
+          child: ListView.builder(
+            itemBuilder: _listeElemanOlustur,
+            itemCount: tumProjeler.length,
+          ),
         ),
     );
   }
@@ -55,13 +60,17 @@ class _UserProjectPageState extends State<UserProjectPage> {
     return Column(
       children: <Widget>[
         Card(
+          elevation: 0,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [color1,color2],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight),
                   borderRadius: BorderRadius.only(topRight: Radius.circular(40.0),bottomLeft: Radius.circular(40.0)),
-                  border: Border.all(color: Colors.blue,width: 3),
                 ),
                 height: 220,
                 width: 100,
@@ -74,7 +83,6 @@ class _UserProjectPageState extends State<UserProjectPage> {
                     ),
                     // Proje acıklaması
                     Container(
-                      color: Colors.red,
                       padding: EdgeInsets.all(20.0),
                       child: Text(tumProjeler[index].projeAyrtintilari),
                     ),
@@ -92,7 +100,9 @@ class _UserProjectPageState extends State<UserProjectPage> {
                         IconButton(
                           color: Colors.blue,
                           icon: Icon(Icons.arrow_forward,size:30),
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserSecilenProje(secilenProjeler: tumProjeler[index],)));
+                          },
                         )
                       ],
                     ),
@@ -102,8 +112,7 @@ class _UserProjectPageState extends State<UserProjectPage> {
             ],
           ),
         ),
-        SizedBox(height: 5,),
-        Divider(color: Colors.black,thickness: 1,),
+        SizedBox(height: 5),
       ],
     );
   }
