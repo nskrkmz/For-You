@@ -48,7 +48,7 @@ class _ManagerJuriEkranState extends State<ManagerJuriEkran> {
   Widget _listeElemanlariniGetir(BuildContext context, int index) {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.people),
+        leading: Icon(Icons.people,color: Colors.purple,),
         title: Text("Juri Adı Soyadı: ${tumJuriler[index].juriAd}${tumJuriler[index].juriSoyad}"),
         subtitle: Text("${tumJuriler[index].juriMeslek}",),
       ),

@@ -29,6 +29,7 @@ dependencies:
   image_picker: ^0.6.0+17
   firebase_storage: ^7.0.0
   fl_chart: ^0.12.2
+  date_format: ^1.0.9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,6 +49,9 @@ flutter:
     - family: LoginFont
       fonts:
         - asset: assets/fonts/Yellowtail-Regular.ttf
+    - family: GovdeFont
+      fonts:
+        - asset: assets/fonts/LibreFranklin-Italic-VariableFont_wght.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

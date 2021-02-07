@@ -41,23 +41,12 @@ class _ManagerDrawerMenuState extends State<ManagerDrawerMenu> {
             },
             highlightColor: Colors.blue,
             child: ListTile(
-              leading: Icon(Icons.pages_rounded),
-              title: Text("Proje islemleri"),
+              leading: Icon(Icons.pages_rounded,color: Colors.purple,),
+              title: Text("Proje Ekle"),
               trailing: Icon(Icons.arrow_forward),
             ),
           ),
           // Yayınlanmış Projeler
-          InkWell(
-            onTap: (){
-              //Navigator.pushNamed(context, "/DrawerProjeislemleri");
-            },
-            highlightColor: Colors.blue,
-            child: ListTile(
-              leading: Icon(Icons.pages_outlined),
-              title: Text("Yayınlanmış Projeler"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-          ),
           // Jüri islemleri
           InkWell(
             onTap: (){
@@ -66,8 +55,8 @@ class _ManagerDrawerMenuState extends State<ManagerDrawerMenu> {
             highlightColor: Colors.blue,
             //splashColor: Colors.red,
             child: ListTile(
-              leading: Icon(Icons.people),
-              title: Text("Jüri işlemleri"),
+              leading: Icon(Icons.people,color: Colors.purple,),
+              title: Text("Jüri Ekle"),
               trailing: Icon(Icons.arrow_forward),
             ),
           ),
@@ -77,9 +66,8 @@ class _ManagerDrawerMenuState extends State<ManagerDrawerMenu> {
             highlightColor: Colors.blue,
             //splashColor: Colors.red,
             child: ListTile(
-              leading: Icon(Icons.power_settings_new_outlined),
+              leading: Icon(Icons.power_settings_new_outlined,color: Colors.purple,),
               title: Text("Çıkış Yap"),
-              trailing: Icon(Icons.arrow_forward),
             ),
           ),
         ],
