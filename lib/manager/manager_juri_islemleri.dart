@@ -41,18 +41,6 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
                     borderSide: BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 onSaved: (girilenAd){
                   _juriAd = girilenAd;
@@ -67,18 +55,6 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
                   labelText: "Juri Soyad",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
@@ -96,18 +72,6 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
                   labelText: "E mail",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
@@ -135,18 +99,6 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
                   borderSide: BorderSide(color: Colors.blue, width: 3),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
               ),
               validator: (String girilenVeri){
                 if(girilenVeri.length <= 6 ){
@@ -163,23 +115,10 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
               // Juri meslek
               TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.location_on),
                   hintText: "Juri Meslek",
                   labelText: "Juri Meslek",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
@@ -206,24 +145,20 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
     );
   }
 
-  void _emailSifreKullaniciOlustur() async {
+  Future<void> _emailSifreKullaniciOlustur() async {
     //debugPrint(widget._auth.toString());
     juriKey.currentState.save();
-    Map<String, dynamic> juri = Map();
-    juri['Juri Email'] = _juriEmail;
-    juri['Juri Sifre'] = _juriPassword;
-    juri['Juri Ad'] = _juriAd;
-    juri['Juri Soyad'] = _juriSoyad;
-    juri['Juri Meslek'] = _jurimeslek;
+    juriKey.currentState.reset();
+    Map<String, dynamic> juribilgileri = Map();
+    juribilgileri['Juri Email'] = _juriEmail;
+    juribilgileri['Juri Sifre'] = _juriPassword;
+    juribilgileri['Juri Ad'] = _juriAd;
+    juribilgileri['Juri Soyad'] = _juriSoyad;
+    juribilgileri['Juri Meslek'] = _jurimeslek;
 
     try {
-      UserCredential _credential = await _auth.createUserWithEmailAndPassword(email: _juriEmail, password: _jurimeslek);
-      //User _newUser = _credential.user;
-      //debugPrint(_newUser.toString());
-      //await _newUser.sendEmailVerification();
-      //debugPrint("Size bir e mail yolladık lütfen onaylayın");
-      // FireBase ekleme işlemleri
-      await _firebaseFirestore.collection('jüriler').doc(_juriEmail).set(juri).then((value) => "Yazma işlemi başarılı");
+      UserCredential _credential = await _auth.createUserWithEmailAndPassword(email: _juriEmail, password: _juriPassword);
+      await _firebaseFirestore.collection('jüriler').doc(_juriEmail).set(juribilgileri).then((value) => "Yazma işlemi başarılı");
       _showDialog();
     } catch (e) {
       debugPrint("**************HATA VAR!!!************");
@@ -235,13 +170,12 @@ class _ManagerJuriIslemleriState extends State<ManagerJuriIslemleri> {
         context: context,
         builder: (BuildContext context){
           return AlertDialog(
-            title: Text("Kayıt Ol"),
-            content: Text("Kayıt işlemi başarılı"),
+            title: Text("Juri Kaydı"),
+            content: Text("Juri Kayıt işlemi başarılı"),
             actions: <Widget>[
               FlatButton(
                   onPressed: (){
                     Navigator.of(context).pop();
-                    Navigator.pop(context);
                   },
                   child: Text("Tamam")),
             ],

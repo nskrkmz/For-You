@@ -5,9 +5,9 @@ import 'package:flutter_foru/manager/manager_homepage.dart';
 import 'package:flutter_foru/manager/manager_juri_islemleri.dart';
 import 'package:flutter_foru/manager/manager_proje_islemleri.dart';
 import 'package:flutter_foru/manager/manager_uyeler.dart';
+import 'package:flutter_foru/user/user_bottom_tamamlanan_projeler.dart';
 import 'package:flutter_foru/user/user_secilen_proje.dart';
 
-import 'user/user_homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,10 +25,12 @@ class MyApp extends StatelessWidget {
         "/DrawerUyeislemleri" : (context) => ManagerUyeEkran(),
         "/Login" : (context) => LoginIslemleri(),
         "/SecilenProje" : (context) => UserSecilenProje(),
+        "/TamamlanmisProjeler" : (context) => UserTamamlananProjeler(),
+
       },
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
     );
   }

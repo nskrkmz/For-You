@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foru/manager/Proje.dart';
 
@@ -32,6 +33,12 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   String okunanProjeSuresi;
   String okunanProjeAyrintilar;
 
+  DateTime suan = DateTime.now();
+  DateTime ucAySonrasi=DateTime(2021, DateTime.now().month+3);
+
+  String _projebaslangic;
+  String _projebitis;
+
 
   @override
   void initState() {
@@ -56,7 +63,8 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Proje islemleri"),
+        title: Text("Proje Ekle"),
+        centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
@@ -76,18 +84,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                     borderSide: BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 onSaved: (baslik){
                   _projeBaslik = baslik;
@@ -102,18 +98,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                   labelText: "Proje Katogorisi",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                 ),
@@ -132,18 +116,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                     borderSide: BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 onSaved: (girilenjuri){
                   _projejuri = girilenjuri;
@@ -160,50 +132,9 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                     borderSide: BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 onSaved: (odul){
                   _projeOdul = odul;
-                },
-              ),
-              SizedBox(height: 10),
-              //Proje Süresi
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.timer),
-                  hintText: "Proje süresi",
-                  labelText: "Proje süresi",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                ),
-                onSaved: (sure){
-                  _projeSure = sure;
                 },
               ),
               SizedBox(height: 10),
@@ -219,18 +150,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                     borderSide: BorderSide(color: Colors.blue, width: 3),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 validator: (String girilenVeri){
                   if(girilenVeri.length <= 6 ){
@@ -242,6 +161,18 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
                 onSaved: (ayrinti){
                   _projeAyrinti = ayrinti;
                 },
+              ),
+              SizedBox(height: 10),
+              //Proje Süresi
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text("Baslangıc Tarihi: $_projebaslangic \nBitiş Tarihi: $_projebitis"),
+                  RaisedButton(
+                    onPressed: _tarihsec,
+                    child: Text("Tarih Seç"),
+                  ),
+                ],
               ),
               SizedBox(height: 10),
               // GirişButonu
@@ -270,7 +201,6 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
   }
 
   Map<String, dynamic> projeAyrintiGetir(){
-
     projeAyrtintilari['Proje ID'] = tumProjeler.length.toString();
     projeAyrtintilari['Proje Başlığı'] = _projeBaslik;
     projeAyrtintilari['Proje Katogorisi'] = _projeKatogori;
@@ -279,6 +209,17 @@ class _ManagerProjeIslemleriState extends State<ManagerProjeIslemleri> {
     projeAyrtintilari['Proje Süre'] = _projeSure;
     projeAyrtintilari['Proje Ayrıntıları'] = _projeAyrinti;
     return projeAyrtintilari;
+  }
+
+  void _tarihsec() {
+    showDatePicker(context: context, initialDate: suan, firstDate: suan, lastDate: ucAySonrasi).then((secilenTarih){
+      setState(() {
+        _projebaslangic = formatDate(DateTime.now(), [dd, '.', mm, '.', yyyy]);
+        _projebitis = formatDate(secilenTarih, [dd, '.', mm, '.', yyyy]);
+        _projeSure = "$_projebaslangic - $_projebitis";
+      });
+
+    });
   }
 }
 

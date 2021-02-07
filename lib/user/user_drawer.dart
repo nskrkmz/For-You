@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foru/user/user_bottom_tamamlanan_projeler.dart';
 
 
 
@@ -18,8 +19,7 @@ class _UserDrawerMenuState extends State<UserDrawerMenu> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text("Enes Korkmaz"), // değişkene atanacak
-            accountEmail: Text("enes@hotmail.com"), //değişkene atılacak
+            accountEmail: Text(widget.firebaseAuthUser.currentUser.email),
             currentAccountPicture: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -27,14 +27,10 @@ class _UserDrawerMenuState extends State<UserDrawerMenu> {
                   image: AssetImage("assets/images/ekran2.png"),
                 ),
                 shape: BoxShape.circle,
-                //resim asset eklenecek
               ),
             ),
           ),
           InkWell(
-            onTap: (){
-              //Navigator.pushNamed(context, "/sayfa")
-            },
             highlightColor: Colors.blue,
             child: ListTile(
               leading: Icon(Icons.power_settings_new_outlined),

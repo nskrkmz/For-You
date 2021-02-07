@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foru/manager/manager_homepage.dart';
-import 'package:flutter_foru/user/user_homepage.dart';
+import 'package:flutter_foru/user/user_home_page.dart';
 import 'package:flutter_foru/uye_ol.dart';
 
 class LoginIslemleri extends StatefulWidget {
@@ -12,19 +12,20 @@ class LoginIslemleri extends StatefulWidget {
 }
 
 class _LoginIslemleriState extends State<LoginIslemleri> {
+
   FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController sifrecontroller = TextEditingController();
   String _email ="";
   String _password = "";
-  Color color1 = const Color(0xFFEA4C4D);
-  Color color2 = const Color(0xFFEDB758);
   var girisKey = GlobalKey<FormState>();
+
 
   @override
   void initState() {
     super.initState();
+    // Sistemi dinleyen kontrol
     _auth.authStateChanges().listen((User user) {
       if (user == null) {
         debugPrint('Giriş yapmış bir kullanıcı yok!');
@@ -39,7 +40,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [color1,color2],
+                colors: [Colors.deepOrange, Colors.pink.shade600],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight),
         ),
@@ -72,23 +73,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                     borderSide: BorderSide(color: Colors.purple, width: 3),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  // standart hali
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
                 ),
                 validator: (String girilenVeri){
                   if (!(girilenVeri.contains("@gmail.com")|| girilenVeri.contains("@hotmail.com") || girilenVeri.contains("@outlook.com") || girilenVeri.contains("@bil.omu.edu.tr"))){
@@ -119,19 +103,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                     borderSide: BorderSide(color: Colors.purple, width: 3),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-
                 ),
                 validator: (String girilenVeri){
                   if(girilenVeri.length <= 6 ){
@@ -171,11 +142,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   }
                   ),
               // cıkıs yap
-              RaisedButton(
-                child: Text("Çıkış Yap"),
-                onPressed: _cikisYap,
-                color: Colors.white,
-              ),
             ],
           ),
         ),
@@ -185,18 +151,14 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
 
 
   void _emailSifreKullaniciGirisyap() async {
+    // girilen degerler degiskenlere save methodu ile atanır.
     girisKey.currentState.save();
-    //debugPrint("save methodu calisti amaa ???");
     try {
-      // eger giriş yapmış kullanıcı yoksa
-      if (_auth.currentUser == null) {
         // Yönetici kontolü
         _firebaseFirestore.collection("yönetici").get().then((gelenVeri) async {
-          //debugPrint("Okunması istenen değer: " + gelenVeri.docs[0].data().toString());
           for(int i= 0; i<gelenVeri.docs.length; i++){
-            if((gelenVeri.docs[i].data()['Email']).toString() == _email){
+            if((gelenVeri.docs[i].data()['Email']) == _email){
               User _oturumAcanYonetici = (await _auth.signInWithEmailAndPassword(email: _email, password: _password)).user;
-              //debugPrint("Login Sayfası oturum açan yonetici email:  "+ _oturumAcanYonetici.email);
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ManagerHomePage(firebaseAuthManager: _auth)));
             }
           }
@@ -205,17 +167,12 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
         // Uye kontrolü
         _firebaseFirestore.collection("users").get().then((gelenVeri) async {
           for(int i=0; i< gelenVeri.docs.length; i++){
-            if(gelenVeri.docs[i].data()['Email'].toString() == _email){
+            if(gelenVeri.docs[i].data()['Email'] == _email){
               User _oturumAcanUser = (await _auth.signInWithEmailAndPassword(email: _email, password: _password)).user;
-              debugPrint(_oturumAcanUser.toString());
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserHomePage(firebaseAuthUser: _auth,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserProjectPage(firebaseAuthUser: _auth)));
             }
           }
         });
-      } else {
-        // giriş yapmış bir kullanıcı
-        debugPrint("Zaten giriş yapmış bir kullanıcı var");
-      }
     } catch (e) {
       debugPrint("Oturum Açarken HATA!:" + e.toString());
     }
@@ -225,7 +182,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
 
   void _cikisYap() async {
     try {
-      // sistemde kullanıcı varsa çıkış yap
+      // sistemde kullanıcı varsa çıkış yapılır
       if (_auth.currentUser != null) {
         debugPrint("${_auth.currentUser.email} sistemden çıkıyor");
         await _auth.signOut();
