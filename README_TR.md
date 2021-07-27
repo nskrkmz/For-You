@@ -1,6 +1,8 @@
 # For You
 
-"For You" Birleşmiş Milletlerin Kalkınma hedeflerinden madde [4.4](https://www.kureselamaclar.org/amaclar/nitelikli-egitim/) e bir çözüm fikri olarak 4U ekibi tarafından geliştirilmiştir.
+"For You" Birleşmiş Milletlerin Kalkınma hedeflerinden madde [4.4](https://www.kureselamaclar.org/amaclar/nitelikli-egitim/) e bir çözüm fikri olarak 4U ekibi tarafından geliştirilmiştir.(48 Saat süren Hackathon[(Flutter Hackathon 2021)](https://hackathonturkiye.com/etkinlik/flutter-hackathon-2021) sonucunda 55 proje arasından 8. olmuştur.)
+
+> [Sunum Videosu](https://drive.google.com/file/d/1MykDyr0R3q3oTNGoSIzzQd3HnO7G9Dg4/view?usp=sharing)
 
 ## Kurulum
  `git clone https://github.com/nskrkmz/For-You`
